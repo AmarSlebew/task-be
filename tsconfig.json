@@ -1,0 +1,24 @@
+{
+  "extends": "@adonisjs/tsconfig/tsconfig.app.json",
+  "compilerOptions": {
+    "rootDir": "./",
+    "outDir": "./build",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "target": "ES2022",
+    "esModuleInterop": true,
+    "strict": false,
+    "strictNullChecks": false,
+    "strictPropertyInitialization": false,
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+
+    "paths": {
+      "#start/*": ["./start/*"],
+      "#app/*": ["./app/*"]
+    }
+  },
+  "include": ["./app", "./start", "./config", "./database", "adonisrc.ts"],
+  "exclude": ["node_modules", "build"]
+}
