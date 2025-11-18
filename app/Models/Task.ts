@@ -1,12 +1,12 @@
-import mongoose from 'mongoose'
+import mongoose from "mongoose";
 
-const taskSchema = new mongoose.Schema({
-  user_id: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
-  title: String,
-  description: String,
-  deadline: Date,
-  status: { type: String, default: 'belum selesai' },
-  created_at: { type: Date, default: Date.now },
-})
+const TaskSchema = new mongoose.Schema(
+  {
+    title: { type: String, required: true },
+    description: { type: String, required: false },
+    userId: { type: String, required: true }, // <-- ini wajib cocok nama nya
+  },
+  { timestamps: true }
+);
 
-export default mongoose.model('Task', taskSchema)
+export default mongoose.model("Task", TaskSchema);

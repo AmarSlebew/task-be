@@ -1,32 +1,42 @@
-# 🧠 SmarTask API – Aplikasi Pengingat dan Manajemen Tugas Pribadi
+# SmarTask API – RESTful API Manajemen Tugas + Autentikasi
 
-SmarTask adalah API berbasis **AdonisJS + MongoDB** yang dirancang untuk mengelola autentikasi pengguna dan data profil secara aman menggunakan **JSON Web Token (JWT)**.  
-Proyek ini dibangun sebagai implementasi konsep dasar **RESTful API** untuk mata kuliah *Rekayasa Perangkat Lunak (RPL)*.
+SmarTask adalah API berbasis **AdonisJS v6 + TypeScript + MongoDB** untuk mengelola:
 
----
+* Autentikasi pengguna (Register, Login, Profile)
+* Manajemen tugas pribadi (Create, Read, Update, Delete)
+* Middleware proteksi menggunakan **JWT**
 
-## ⚙️ Fitur Utama
-
-| Fitur              | Deskripsi                                                                        |
-|--------------------|----------------------------------------------------------------------------------|
-| **Register User**  | Mendaftarkan pengguna baru dengan hashing password menggunakan `bcrypt`          |
-| **Login User**     | Autentikasi pengguna dan pembuatan token JWT                                     |
-| **Profile User**   | Mengambil data profil pengguna yang sedang login (protected route)               |
-| **Error Handling** | Menangani kesalahan seperti user tidak ditemukan, password salah, token invalid  |
+API ini dibuat sebagai implementasi praktik **Rekayasa Perangkat Lunak (RPL)** dan konsep **RESTful API**.
 
 ---
 
-## 🏗️ Teknologi yang Digunakan
-- **Node.js (v20+)**
-- **AdonisJS (v6)**
-- **MongoDB (Mongoose)**
-- **JWT (jsonwebtoken)**
-- **bcrypt.js**
-- **TypeScript**
+## Fitur Utama
+
+| Fitur               | Deskripsi                                                   |
+| ------------------- | ----------------------------------------------------------- |
+| **Register User**   | Membuat akun baru + hash password dengan bcrypt             |
+| **Login User**      | Menghasilkan JWT token sebagai autentikasi                  |
+| **Profile User**    | Mengambil profil user berdasarkan token                     |
+| **Create Task**     | Menambahkan task baru berdasarkan user login                |
+| **Get Tasks**       | Mengambil daftar task milik user                            |
+| **Update Task**     | Mengubah task tertentu milik user                           |
+| **Delete Task**     | Menghapus task berdasarkan ID                               |
+| **Protected Route** | Semua endpoint Task hanya bisa diakses oleh user yang login |
 
 ---
 
-## 📁 Struktur Folder
+## Teknologi yang Digunakan
+
+* **Node.js v20+**
+* **AdonisJS v6**
+* **TypeScript**
+* **MongoDB (Mongoose)**
+* **JWT (jsonwebtoken)**
+* **bcrypt.js**
+
+---
+
+## Struktur Folder (Terbaru)
 
 ```
 taskflow-api/
@@ -34,15 +44,20 @@ taskflow-api/
 ├── app/
 │   ├── Controllers/
 │   │   └── Http/
-│   │       └── AuthController.ts
+│   │       ├── AuthController.ts
+│   │       └── TaskController.ts
+│   ├── Middleware/
 │   ├── Models/
-│   │   └── User.ts
+│   │   ├── User.ts
+│   │   └── Task.ts
 │
 ├── config/
-│   └── database.ts
+│   └── ...
 │
 ├── start/
-│   └── routes.ts
+│   ├── routes.ts
+│   ├── kernel.ts
+│   └── env.ts
 │
 ├── .env
 ├── package.json
@@ -51,50 +66,56 @@ taskflow-api/
 
 ---
 
-## 🚀 Cara Menjalankan Proyek
+## Cara Menjalankan Proyek
 
-1. **Clone repo atau buka folder project**
-   ```bash
-   git clone https://github.com/username/taskflow-api.git
-   cd taskflow-api
-   ```
+### 1️⃣ Clone Repository
 
-2. **Install dependencies**
-   ```bash
-   npm install
-   ```
+```bash
+git clone https://github.com/username/taskflow-api.git
+cd taskflow-api
+```
 
-3. **Atur file `.env`**
-   ```env
-   PORT=3333
-   HOST=127.0.0.1
-   NODE_ENV=development
-   APP_KEY=some_random_key
-   JWT_SECRET=secret123
-   DB_CONNECTION=mongodb
-   MONGO_URI=mongodb://localhost:27017/smartask_db
-   ```
+### 2️⃣ Install Dependencies
 
-4. **Jalankan server**
-   ```bash
-   node ace serve --watch
-   ```
+```bash
+npm install
+```
 
-5. Jika berhasil, terminal akan menampilkan:
-   ```
-   [ info ] starting HTTP server...
-   [ info ] Connected to MongoDB
-   Server address: http://127.0.0.1:3333
-   ```
+### 3️⃣ Konfigurasi `.env`
+
+Buat file `.env`:
+
+```env
+PORT=3333
+HOST=127.0.0.1
+NODE_ENV=development
+APP_KEY=your_app_key
+JWT_SECRET=your_jwt_secret
+MONGO_URI=mongodb://localhost:27017/smartask_db
+```
+
+### 4️⃣ Jalankan Server
+
+```bash
+node ace serve --watch
+```
+
+Jika berhasil:
+
+```
+[ info ] starting HTTP server...
+[ info ] Connected to MongoDB
+Server address: http://127.0.0.1:3333
+```
 
 ---
 
-## 🔐 Endpoint API
+# Autentikasi
 
-### **1️⃣ Register User**
-**POST** `http://127.0.0.1:3333/register`
+## 1️⃣ Register User
 
-**Body (JSON):**
+**POST** `/register`
+
 ```json
 {
   "name": "Kelompok8",
@@ -103,23 +124,10 @@ taskflow-api/
 }
 ```
 
-**Response (201):**
-```json
-{
-  "message": "User berhasil didaftarkan!",
-  "user": {
-    "name": "Kelompok8",
-    "email": "kelompok8@mail.com"
-  }
-}
-```
+## 2️⃣ Login User
 
----
+**POST** `/login`
 
-### **2️⃣ Login User**
-**POST** `http://127.0.0.1:3333/login`
-
-**Body (JSON):**
 ```json
 {
   "email": "kelompok8@mail.com",
@@ -127,49 +135,104 @@ taskflow-api/
 }
 ```
 
-**Response (200):**
+**Response:**
+
 ```json
 {
   "message": "Login berhasil!",
-  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+  "token": "eyJhbGciOi..."
 }
+```
+
+## 3️⃣ Get Profile
+
+**GET** `/profile`
+
+Header:
+
+```
+Authorization: Bearer <token>
 ```
 
 ---
 
-### **3️⃣ Get Profile (Protected Route)**
-**GET** `http://127.0.0.1:3333/profile`
+# Manajemen Task
 
-**Header:**
+## 1️⃣ Create Task
+
+**POST** `/tasks`
+
+Header:
+
 ```
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+Authorization: Bearer <token>
 ```
 
-**Response (200):**
+Body:
+
 ```json
 {
-  "message": "Data profil berhasil diambil!",
-  "user": {
-    "name": "Kelompok8",
-    "email": "kelompok8@mail.com"
-  }
+  "title": "Belajar AdonisJS",
+  "description": "Membuat fitur CRUD"
+}
+```
+
+## 2️⃣ Get Tasks
+
+**GET** `/tasks`
+
+Header:
+
+```
+Authorization: Bearer <token>
+```
+
+Response:
+
+```json
+{
+  "message": "Daftar task berhasil diambil!",
+  "tasks": [ ... ]
+}
+```
+
+## 3️⃣ Update Task
+
+**PUT** `/tasks/:id`
+
+Body:
+
+```json
+{
+  "title": "Update Judul",
+  "description": "Update Deskripsi"
+}
+```
+
+## 4️⃣ Delete Task
+
+**DELETE** `/tasks/:id`
+
+Response:
+
+```json
+{
+  "message": "Task berhasil dihapus!"
 }
 ```
 
 ---
 
-## 🧪 Pengujian dengan Postman
+# Pengujian dengan Postman
 
-| Endpoint    | Method   | Status            | Deskripsi                           |
-|-----------  |--------- |-----------------  |-------------------------------------|
-| `/register` | POST     | ✅ 201 Created    | User baru berhasil didaftarkan      |
-| `/login`    | POST     | ✅ 200 OK         | Login sukses dan token dikembalikan |
-| `/profile`  | GET      | ✅ 200 OK         | Token valid, data user ditampilkan  |
+| Endpoint     | Method | Status | Keterangan           |
+| ------------ | ------ | ------ | -------------------- |
+| `/register`  | POST   | 201    | Daftar pengguna baru |
+| `/login`     | POST   | 200    | Mendapatkan token    |
+| `/profile`   | GET    | 200    | Protected route      |
+| `/tasks`     | POST   | 201    | Membuat task         |
+| `/tasks`     | GET    | 200    | Mengambil semua task |
+| `/tasks/:id` | PUT    | 200    | Update task          |
+| `/tasks/:id` | DELETE | 200    | Hapus task           |
 
 ---
-
-## 🧩 Catatan Pengembangan
-- Gunakan library `bcrypt` untuk keamanan password.
-- Gunakan `JWT_SECRET` yang unik dan rahasia di file `.env`.
-- Token akan kadaluarsa setelah **1 jam** (`expiresIn: '1h'`).
-- Semua endpoint menggunakan format **JSON response** agar mudah diintegrasikan dengan frontend.

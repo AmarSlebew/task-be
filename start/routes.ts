@@ -8,14 +8,21 @@
 */
 
 import router from '@adonisjs/core/services/router'
-import AuthController from '../app/Controllers/AuthController.js'
+import AuthController from '../app/Controllers/Http/AuthController.js'
+import TaskController from '../app/Controllers/Http/TaskController.js'
 
-// Route test
-router.get('/', async () => {
+// Test route
+router.get('/', () => {
   return { message: 'Server aktif 🚀' }
 })
 
-// Route utama
-router.post('/register', [AuthController, 'register'])
-router.post('/login', [AuthController, 'login'])
-router.get('/profile', [AuthController, 'profile'])
+// Auth
+router.post('/register', (ctx) => new AuthController().register(ctx))
+router.post('/login', (ctx) => new AuthController().login(ctx))
+router.get('/profile', (ctx) => new AuthController().profile(ctx))
+
+// Tasks
+router.post('/tasks', (ctx) => new TaskController().store(ctx))
+router.get('/tasks', (ctx) => new TaskController().index(ctx))
+router.put('/tasks/:id', (ctx) => new TaskController().update(ctx))
+router.delete('/tasks/:id', (ctx) => new TaskController().destroy(ctx))

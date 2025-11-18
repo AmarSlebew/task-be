@@ -1,25 +1,63 @@
-# Dependencies and AdonisJS build
-node_modules
-build
-tmp
+# ───────────────────────────────
+#  AdonisJS + TypeScript + MongoDB
+# ───────────────────────────────
 
-# Secrets
+# Dependencies
+node_modules/
+.tmp/
+build/
+dist/
+tmp/
+
+# Environment & Secrets
 .env
 .env.local
-.env.production.local
-.env.development.local
+.env.*.local
+.env.production
+.env.development
+.env.test
 
-# Frontend assets compiled code
-public/assets
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
 
-# Build tools specific
-npm-debug.log
-yarn-error.log
+# AdonisJS specific
+ace  
+.knexfile.js
+.adonisrc.json
+tsconfig.tsbuildinfo
 
-# Editors specific
-.fleet
-.idea
-.vscode
+# Compiled TypeScript
+*.tsbuildinfo
+start/app.js
+start/kernel.js
+start/routes.js
+build/
+dist/
 
-# Platform specific
+# Coverage output
+coverage/
+
+# Database
+database/*.sqlite
+database/*.sqlite-journal
+
+# Public assets (generated)
+public/**/*
+!public/.gitkeep
+
+# IDE / Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*.fleet/
+
+# System files
 .DS_Store
+Thumbs.db
+
+# Test outputs
+tests/tmp/
