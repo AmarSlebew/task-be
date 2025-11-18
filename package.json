@@ -60,6 +60,7 @@
     "@vinejs/vine": "^3.0.1",
     "bcryptjs": "^3.0.2",
     "jsonwebtoken": "^9.0.2",
+    "mongodb": "^7.0.0",
     "mongoose": "^8.19.1",
     "reflect-metadata": "^0.2.2"
   },
