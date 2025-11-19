@@ -1,4 +1,4 @@
-# SmarTask API – RESTful API Manajemen Tugas + Autentikasi
+# 🧠 SmarTask API – RESTful API Manajemen Tugas + Autentikasi
 
 SmarTask adalah API berbasis **AdonisJS v6 + TypeScript + MongoDB** untuk mengelola:
 
@@ -10,7 +10,7 @@ API ini dibuat sebagai implementasi praktik **Rekayasa Perangkat Lunak (RPL)** d
 
 ---
 
-## Fitur Utama
+## ⚙️ Fitur Utama
 
 | Fitur               | Deskripsi                                                   |
 | ------------------- | ----------------------------------------------------------- |
@@ -25,7 +25,7 @@ API ini dibuat sebagai implementasi praktik **Rekayasa Perangkat Lunak (RPL)** d
 
 ---
 
-## Teknologi yang Digunakan
+## 🏗️ Teknologi yang Digunakan
 
 * **Node.js v20+**
 * **AdonisJS v6**
@@ -36,7 +36,7 @@ API ini dibuat sebagai implementasi praktik **Rekayasa Perangkat Lunak (RPL)** d
 
 ---
 
-## Struktur Folder (Terbaru)
+## 📂 Struktur Folder (Terbaru)
 
 ```
 taskflow-api/
@@ -66,7 +66,7 @@ taskflow-api/
 
 ---
 
-## Cara Menjalankan Proyek
+## 🚀 Cara Menjalankan Proyek
 
 ### 1️⃣ Clone Repository
 
@@ -85,15 +85,6 @@ npm install
 
 Buat file `.env`:
 
-```env
-PORT=3333
-HOST=127.0.0.1
-NODE_ENV=development
-APP_KEY=your_app_key
-JWT_SECRET=your_jwt_secret
-MONGO_URI=mongodb://localhost:27017/smartask_db
-```
-
 ### 4️⃣ Jalankan Server
 
 ```bash
@@ -110,7 +101,7 @@ Server address: http://127.0.0.1:3333
 
 ---
 
-# Autentikasi
+# 🔐 Autentikasi
 
 ## 1️⃣ Register User
 
@@ -156,7 +147,7 @@ Authorization: Bearer <token>
 
 ---
 
-# Manajemen Task
+# 📝 Manajemen Task
 
 ## 1️⃣ Create Task
 
@@ -223,7 +214,7 @@ Response:
 
 ---
 
-# Pengujian dengan Postman
+# 🧪 Pengujian dengan Postman
 
 | Endpoint     | Method | Status | Keterangan           |
 | ------------ | ------ | ------ | -------------------- |
@@ -236,3 +227,43 @@ Response:
 | `/tasks/:id` | DELETE | 200    | Hapus task           |
 
 ---
+
+# 🧩 Catatan Pengembangan
+
+* Selalu gunakan **JWT_SECRET yang kuat**.
+* Simpan `.env` ke dalam `.gitignore` (jangan pernah di-push).
+* Semua task terhubung ke user melalui `userId`.
+* Response API menggunakan format JSON yang konsisten.
+
+---
+
+# 🌦 Integrasi API Cuaca (OpenWeather)
+
+SmarTask kini mendukung fitur **pengambilan data cuaca realtime** menggunakan API dari **OpenWeatherMap**. Pengguna dapat mengambil cuaca berdasarkan nama kota melalui endpoint berikut:
+
+### **GET** `/weather/:city`
+
+Contoh:
+
+```
+GET /weather/Palu
+```
+
+**Response:**
+
+```json
+{
+  "city": "Palu",
+  "temperature": 26,
+  "weather": "broken clouds",
+  "icon": "04d"
+}
+```
+
+Untuk mengaktifkan fitur ini, tambahkan API key pada file `.env`:
+
+```
+OPENWEATHER_API_KEY=isi_api_key_kamu
+```
+
+Dan pastikan koneksi internet aktif agar API dapat mengembalikan data.
