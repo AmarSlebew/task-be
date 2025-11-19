@@ -4,7 +4,7 @@ import mongoose from 'mongoose'
 
 export async function initMongo() {
   try {
-    await mongoose.connect(env.get('MONGO_URI'), {
+    await mongoose.connect(env.get('MONGO_URL'), {
       dbName: env.get('MONGO_DB_NAME'),
     })
 
