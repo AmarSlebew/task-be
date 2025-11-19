@@ -58,6 +58,7 @@
     "@adonisjs/env": "^6.2.0",
     "@adonisjs/lucid": "^21.6.1",
     "@vinejs/vine": "^3.0.1",
+    "axios": "^1.13.2",
     "bcryptjs": "^3.0.2",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.19.1",
