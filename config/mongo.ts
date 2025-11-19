@@ -8,9 +8,9 @@ export async function initMongo() {
       dbName: env.get('MONGO_DB_NAME'),
     })
 
-    console.log('✅ Berhasil terkoneksi ke MongoDB Atlas')
+    console.log('Berhasil terkoneksi ke MongoDB Atlas')
   } catch (err) {
-    console.error('❌ MongoDB gagal terkoneksi', err)
+    console.error('MongoDB gagal terkoneksi', err)
   }
 }
 
