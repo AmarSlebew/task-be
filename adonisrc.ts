@@ -8,7 +8,6 @@ export default defineConfig({
 
   commands: [() => import('@adonisjs/core/commands')],
 
-
   providers: [
     () => import('@adonisjs/core/providers/app_provider'),
     () => import('@adonisjs/core/providers/hash_provider'),
@@ -20,10 +19,11 @@ export default defineConfig({
     () => import('@adonisjs/cors/cors_provider'),
   ],
 
-preloads: [
-  () => import('#start/routes'),
-  () => import('#start/kernel'),
-],
+  preloads: [
+    () => import('#start/kernel'),
+    () => import('#start/routes'),
+    () => import('#start/mongo'),
+  ],
 
   tests: {
     suites: [
