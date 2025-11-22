@@ -1,7 +1,8 @@
+import AuthController from '#controllers/auth_controller'
+import QuotesController from '#controllers/quotes_controller'
+import TaskController from '#controllers/tasks_controller'
+import WeathersController from '#controllers/weathers_controller'
 import router from '@adonisjs/core/services/router'
-import AuthController from '../app/Controllers/Http/AuthController.js'
-import TaskController from '../app/Controllers/Http/TaskController.js'
-import WeatherController from '../app/Controllers/Http/WeatherController.js'
 
 // Test route
 router.get('/', () => {
@@ -20,6 +21,9 @@ router.put('/tasks/:id', (ctx) => new TaskController().update(ctx))
 router.delete('/tasks/:id', (ctx) => new TaskController().destroy(ctx))
 
 // Weather
-router.get('/weather/:city', (ctx) => new WeatherController().getWeather(ctx))
+router.get('/weather/:city', (ctx) => new WeathersController().getWeather(ctx))
+
+// Quotes
+router.get('/quotes/random', (ctx) => new QuotesController().random(ctx))
 
 export default router

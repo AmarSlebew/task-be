@@ -1,5 +1,5 @@
 import { HttpContext } from '@adonisjs/core/http'
-import Task from '../../Models/Task.js'
+import Task from '#models/Task'
 import jwt from 'jsonwebtoken'
 
 export default class TaskController {

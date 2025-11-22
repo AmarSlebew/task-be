@@ -267,3 +267,22 @@ OPENWEATHER_API_KEY=isi_api_key_kamu
 ```
 
 Dan pastikan koneksi internet aktif agar API dapat mengembalikan data.
+
+---
+
+# Integrasi API Quotes (Motivational Quotes)
+
+TaskFlow kini mendukung fitur **pengambilan kutipan motivasi** menggunakan API eksternal. Pengguna dapat mengambil quote secara realtime melalui endpoint berikut:
+
+### **GET** `/quotes/random`
+
+Contoh:
+
+**Response:**
+
+```json
+{
+  "success": true,
+  "quote": "Hidup adalah perjalanan menuju diri sendiri.",
+  "author": "Al-Ghazali"
+}

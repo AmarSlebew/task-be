@@ -1,7 +1,7 @@
 import type { HttpContext } from '@adonisjs/core/http'
-import WeatherService from '../../Services/WeatherService.js'
+import WeatherService from '#services/WeatherService'
 
-export default class WeatherController {
+export default class WeathersController {
   async getWeather({ params, response }: HttpContext) {
     try {
       const city = params.city

@@ -19,8 +19,5 @@ export default await Env.create(new URL('../', import.meta.url), {
   LOG_LEVEL: Env.schema.enum(['fatal', 'error', 'warn', 'info', 'debug', 'trace', 'silent']),
   MONGO_URL: Env.schema.string(),
   JWT_SECRET: Env.schema.string(),
-// ⬇⬇ Tambahkan ini ⬇⬇
-OPENWEATHER_API_KEY: Env.schema.string(),
-  
+  OPENWEATHER_API_KEY: Env.schema.string(),
 })
-

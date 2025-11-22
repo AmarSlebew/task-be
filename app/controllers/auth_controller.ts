@@ -1,4 +1,4 @@
-import User from '../../Models/User.js'
+import User from '#models/User'
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 import type { HttpContext } from '@adonisjs/core/http'
